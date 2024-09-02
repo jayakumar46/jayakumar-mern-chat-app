@@ -37,7 +37,6 @@ export const signup = async (req, res) => {
     if (newUser) {
       //genarate jwt token here
       generateTokenAndSetCookie(newUser._id, res);
-
       await newUser.save();
 
       res.status(201).json({
@@ -87,3 +86,4 @@ export const logout = async (req, res) => {
     res.status(500).json({ error: "Internel server Error" });
   }
 };
+                                     
