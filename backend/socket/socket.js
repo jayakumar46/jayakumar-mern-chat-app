@@ -26,7 +26,7 @@ io.on('connection',(socket)=>{
     if(userId != "undefined"){
         userSocketMap[userId] = socket.id;
     }
-    // io.emit() is used send events to alll the connected clients
+    // io.emit() is used send events to all the connected clients
     io.emit("getOnlineUsers",Object.keys(userSocketMap));
 
     //socket.on() is used to listen to the events , can be use both on client and server side
