@@ -10,11 +10,15 @@ import useLastSeenStore from "../../zustand/useLastSeenStore";
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
   const { socket } = useSocketContext();
+  const { setLastSeen } = useLastSeenStore();
+
+
 
   useEffect(() => {
     if (!socket) return;
 
     const handleLastSeen = ({ userId, lastSeen }) => {
+
       setLastSeen(userId, lastSeen);
     };
 
@@ -25,12 +29,10 @@ const MessageContainer = () => {
     };
   }, [socket, setLastSeen]);
 
-
   const { onlineUsers } = useSocketContext();
-  console.log(onlineUsers);
 
   const isSelectedUserOnline = selectedConversation && onlineUsers.includes(selectedConversation._id);
-  console.log(isSelectedUserOnline);
+
 
 
 
