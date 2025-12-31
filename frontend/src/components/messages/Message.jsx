@@ -5,37 +5,31 @@ import useConversation from "../../zustand/useConversation";
 const Message = ({ message }) => {
   const { authUser } = useAuthContext();
   const { selectedConversation } = useConversation();
+
   const fromMe = message.senderId === authUser._id;
-  const formateTime = extractTime(message.createdAt);
-  const chatClassName = fromMe ? "chat-end" : "chat-start";
-  const profilePic = fromMe
-    ? authUser.profilePic
-    : selectedConversation?.profilePic;
-  const bubbleBgcolor = fromMe ? "bg-blue-500" : "";
-  const shakeClass = message.shouldShake ? "shake" : "";
+  const time = extractTime(message.createdAt);
 
   return (
-    <div className={`chat ${chatClassName}`}>
-      <div className="chat-image avatar">
-        <div className="w-10 rounded-full">
-          <img src={profilePic} />
-        </div>
-      </div>
+    <div className={`flex ${fromMe ? "justify-end" : "justify-start"} mb-3`}>
       <div
-        className={`chat-bubble text-white ${bubbleBgcolor} ${shakeClass} pb-2`}
+        className={`relative max-w-[75%] px-4 py-2 rounded-2xl text-sm leading-relaxed
+        ${fromMe
+            ? "bg-blue-500 text-white rounded-br-sm"
+            : "bg-[#2f2f2f] text-white rounded-bl-sm"
+          }`}
       >
-        {message.message}
-      </div>
-      <div
-        className={`chat-fotter opacity-50 text-xl flex gap-1 items-center text-white`}
-      >
-        {formateTime}
+        <p className="break-words">{message.message}</p>
+
+        <span className="block text-[10px] text-gray-300 text-right mt-1">
+          {time}
+        </span>
       </div>
     </div>
   );
 };
 
 export default Message;
+
 
 // const Message = () => {
 //   return (
