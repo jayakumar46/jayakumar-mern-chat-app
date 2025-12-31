@@ -10,16 +10,6 @@ import useLastSeenStore from "../../zustand/useLastSeenStore";
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
   const { socket } = useSocketContext();
-  const setLastSeen = useLastSeenStore((s) => s.setLastSeen);
-  const {lastSeenMap} = useLastSeenStore();
-  console.log(lastSeenMap);
-  useEffect(()=>{
-    socket?.on("lastSeenUpdate", ({ userId, lastSeen }) => {
-      console.log(lastSeen);
-      
-    });
-  },[socket])
-  
 
   useEffect(() => {
     if (!socket) return;

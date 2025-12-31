@@ -15,12 +15,13 @@ export const SocketContextProvider = ({ children }) => {
   const { authUser } = useAuthContext();
   const { lastSeenMap, setLastSeen } = useLastSeenStore();
 
-  console.log(lastSeenMap.lastSeenMap);
+  
+
 
 
   useEffect(() => {
     if (authUser) {
-      const socket = io("http://localhost:8000", {
+      const socket = io("/", {
         query: {
           userId: authUser._id,
         },
